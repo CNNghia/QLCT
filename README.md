@@ -1,86 +1,230 @@
-💰 Expense Manager App
-Expense Manager App là ứng dụng di động giúp người dùng quản lý thu chi cá nhân, theo dõi dòng tiền và phân tích tài chính hiệu quả.  
-Ứng dụng cung cấp các công cụ ghi chép giao dịch nhanh chóng, trực quan và dễ sử dụng.
+# 💰 Expense Manager App
+
+<p align="center">
+  <b>Ứng dụng quản lý thu chi cá nhân trên Android</b><br>
+  Theo dõi dòng tiền • Phân tích tài chính • Trực quan & dễ dùng
+</p>
+
 ---
-🚀 Tính năng chính
-💸 Quản lý giao dịch
-Thêm / sửa / xóa khoản thu & chi
-Hiển thị danh sách realtime
-🏷️ Phân loại dữ liệu
-Gắn nhãn: Ăn uống, đi lại, giải trí
-👛 Quản lý ví
-CRUD ví tiền
-Hiển thị số dư thực tế
-📊 Thống kê & Báo cáo
-Tổng thu / chi
-Biểu đồ tròn & cột theo ngày / tháng
-🔍 Tìm kiếm & Lọc
-Theo ghi chú
-Theo danh mục
-Theo thời gian
-🔐 Lưu trữ cục bộ
-Sử dụng Room Database (SQLite)
-Dữ liệu lưu trực tiếp trên thiết bị
+
+## 📌 Giới thiệu
+
+**Expense Manager App** là ứng dụng di động giúp người dùng:
+
+- Quản lý thu chi cá nhân
+- Theo dõi dòng tiền hằng ngày
+- Phân tích tài chính qua biểu đồ
+
+Ứng dụng hướng tới sự **đơn giản – trực quan – hiệu quả**.
+
 ---
-🏗️ Kiến trúc & Công nghệ
-Dự án sử dụng mô hình:
+
+## 🚀 Tính năng chính
+
+### 💸 Quản lý giao dịch
+- Thêm / sửa / xóa giao dịch
+- Phân biệt thu nhập & chi tiêu
+- Hiển thị danh sách realtime
+
+### 🏷️ Phân loại dữ liệu
+- Danh mục: Ăn uống, đi lại, giải trí...
+- Dễ dàng lọc & thống kê
+
+### 👛 Quản lý ví
+- Tạo nhiều ví (tiền mặt, ngân hàng...)
+- Theo dõi số dư chính xác
+
+### 📊 Thống kê & báo cáo
+- Tổng thu / chi theo:
+  - Ngày
+  - Tháng
+- Biểu đồ:
+  - Tròn (Pie Chart)
+  - Cột (Bar Chart)
+
+### 🔍 Tìm kiếm & lọc
+- Theo ghi chú
+- Theo danh mục
+- Theo thời gian
+
+### 🔐 Lưu trữ cục bộ
+- Sử dụng Room Database (SQLite)
+- Dữ liệu lưu trên thiết bị → bảo mật
+
+---
+
+## 🏗️ Kiến trúc hệ thống
+
+Dự án sử dụng:
+
 > **MVVM + Clean Architecture**
-🧰 Công nghệ sử dụng
-Thành phần	Công nghệ
-Ngôn ngữ	Kotlin
-IDE	Android Studio
-Database	Room (SQLite)
-UI	XML + Material Design
-Data Flow	UI → ViewModel → Repository → DAO → Database
+
+### 📌 Data Flow
+
+### 📦 Ưu điểm
+
+- Dễ bảo trì
+- Tách biệt logic
+- Dễ test
+- Mở rộng tốt
+
 ---
-📂 Cấu trúc thư mục
-```
+
+## 🧰 Công nghệ sử dụng
+
+| Thành phần | Công nghệ |
+|----------|--------|
+| Ngôn ngữ | Kotlin |
+| IDE | Android Studio |
+| Database | Room (SQLite) |
+| UI | XML + Material Design |
+| Architecture | MVVM |
+| Async | LiveData / Flow |
+
+---
+
+## 📂 Cấu trúc thư mục
+```bash
 app/
-├── data/           
-├── domain/         
-├── presentation/   
-├── utils/          
-└── res/layout/     
+├── data/
+├── domain/
+├── presentation/
+├── utils/
+└── res/layout/
 ```
+
 ---
-👨‍💻 Phân công nhiệm vụ (Final)
-Thành viên	Feature	Nhiệm vụ
-Nghĩa	Data & Wallet	Thiết kế DB, Room, Repository, màn hình Wallet
-Anh	Transaction	CRUD giao dịch, validate dữ liệu, realtime
-Đức	UI & Dashboard	Thiết kế UI, layout XML
-Thịnh	Report & Logic	Tính toán, thống kê, biểu đồ
-Đạt	Integration & QA	Search, Filter, Navigation, test & fix bug
+
+## 👨‍💻 Phân công nhiệm vụ
+
+| Thành viên | Feature | Mô tả |
+|----------|--------|------|
+| Nghĩa | Data & Wallet | Database, Room, Repository, màn hình ví |
+| Anh | Transaction | CRUD giao dịch, validate |
+| Đức | UI & Dashboard | Thiết kế giao diện |
+| Thịnh | Report & Logic | Thống kê, biểu đồ |
+| Đạt | Integration & QA | Search, Filter, test |
+
 ---
-🔄 Quy trình phát triển
-Phase 1: Setup + UI mock
-Phase 2: CRUD
-Phase 3: Thống kê
-Phase 4: Test & Release
+
+## 🔄 Quy trình phát triển
+
+### 📍 Phase 1
+- Setup project
+- Database
+- UI mock
+
+### 📍 Phase 2
+- CRUD Transaction
+- CRUD Wallet
+
+### 📍 Phase 3
+- Thống kê
+- Biểu đồ
+
+### 📍 Phase 4
+- Integration
+- Testing
+- Hoàn thiện
+
 ---
-🌿 Git Workflow
-Tạo branch: feature/<ten>
-Không push trực tiếp main
-Commit chuẩn:
-feat: add feature
-fix: bug fix
----
-🎯 Quy ước Code
-❌ Không gọi DAO trong UI
-✅ Dùng Repository + ViewModel
----
+
+## 🌿 Git Workflow
+
+### 🔀 Branch
 feature/nghia-wallet
+
 feature/anh-transaction
+
 feature/duc-dashboard
+
 feature/thinh-report
+
 feature/dat-integration
+
+### 📌 Quy tắc
+
+- ❌ Không push trực tiếp vào `main`
+- ✅ Luôn pull trước khi code
+- ✅ Dùng Pull Request
+
+### 📝 Commit chuẩn
+feat: add transaction screen 
+
+fix: crash when insert data 
+
+refactor: clean repository
+
+
 ---
-⚙️ Cài đặt & chạy
-```
-git clone https://github.com/your-repo/expense-manager.git
-```
-Mở Android Studio
-Sync Gradle
-Run app
+
+## 🎯 Quy ước code
+
+### ❌ Cấm
+
+- UI gọi trực tiếp DAO
+- Viết logic trong Activity / Fragment
+
+### ✅ Bắt buộc
+
+- Dùng Repository pattern
+- ViewModel làm trung gian
+
 ---
-📄 License
+
+## ⚙️ Cài đặt & chạy
+
+### 1. Clone project
+https://github.com/CNNghia/QLCT.git
+
+### 2. Mở project
+
+- Android Studio
+
+### 3. Chạy app
+
+- Emulator
+- Hoặc thiết bị thật
+
+---
+
+
+---
+
+## 🔥 Hướng phát triển thêm
+
+- 🔐 Login (Firebase)
+- ☁️ Đồng bộ cloud
+- 🌍 Đa ngôn ngữ (i18n)
+- 📤 Export Excel / PDF
+- 📉 AI gợi ý chi tiêu
+
+---
+
+## 📄 License
+
 MIT License
+
+---
+
+## ⭐ Đóng góp
+
+Nếu bạn muốn đóng góp:
+
+1. Fork repo
+2. Tạo branch mới
+3. Commit code
+4. Tạo Pull Request
+
+---
+
+## ❤️ Ghi chú
+
+Dự án phục vụ mục đích học tập và phát triển kỹ năng:
+
+- Android
+- Clean Architecture
+- Teamwork Git
+
+---
+
