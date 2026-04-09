@@ -29,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         val tvTotalBalance = findViewById<TextView>(R.id.tvTotalBalance)
         tvTotalBalance.text = "14.725.000 đ"
 
+        // Bắt sự kiện icon góc phải trên cùng Dashboard -> Phóng qua màn hình VÍ
+        val btnOpenWallet = findViewById<View>(R.id.btnOpenWallet)
+        btnOpenWallet.setOnClickListener {
+            val intent = android.content.Intent(this, WalletActivity::class.java)
+            startActivity(intent)
+        }
 
         // Mock dữ liệu thẻ Tổng Chi
         val expenseCard = findViewById<View>(R.id.cardExpense)

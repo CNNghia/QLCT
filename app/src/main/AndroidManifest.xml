@@ -27,6 +27,10 @@
             android:name=".AddTransactionActivity"
             android:theme="@style/Theme.QLCT"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity 
+            android:name=".WalletActivity"
+            android:theme="@style/Theme.QLCT" />
     </application>
 
 </manifest>
