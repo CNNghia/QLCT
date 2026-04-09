@@ -36,6 +36,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Bắt sự kiện chữ "XEM TẤT CẢ" -> Mở Màn hình Danh sách Giao Dịch
+        val tvViewAll = findViewById<TextView>(R.id.tvViewAll)
+        tvViewAll.setOnClickListener {
+            val intent = android.content.Intent(this, TransactionsActivity::class.java)
+            startActivity(intent)
+        }
+
         // Mock dữ liệu thẻ Tổng Chi
         val expenseCard = findViewById<View>(R.id.cardExpense)
         val titleExpense = expenseCard.findViewById<TextView>(R.id.tvStatTitle)

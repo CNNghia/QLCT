@@ -31,6 +31,10 @@
         <activity 
             android:name=".WalletActivity"
             android:theme="@style/Theme.QLCT" />
+
+        <activity 
+            android:name=".TransactionsActivity"
+            android:theme="@style/Theme.QLCT" />
     </application>
 
 </manifest>
