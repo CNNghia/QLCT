@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val amountIncome = incomeCard.findViewById<TextView>(R.id.tvStatAmount)
         titleIncome.text = "Tổng Thu"
         amountIncome.text = "+ 15.000.000 đ"
+        val tvTotalBalance = findViewById<TextView>(R.id.tvTotalBalance)
+        tvTotalBalance.text = "14.725.000 đ"
 
         // Mock dữ liệu thẻ Tổng Chi
         val expenseCard = findViewById<View>(R.id.cardExpense)
