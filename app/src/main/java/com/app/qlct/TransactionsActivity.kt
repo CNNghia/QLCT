@@ -39,7 +39,7 @@ class TransactionsActivity : AppCompatActivity() {
 
             // Khúc này DEV Logic sau này sẽ viết lệnh gọi từ Database
             // Ở đây tôi set hasData = false để ép nó bắn ra Màn Hình Trống (Empty State) cho bạn test UI
-            val hasData = true
+            val hasData = true 
 
             if (hasData) {
                 rvTransactions.visibility = View.VISIBLE
