@@ -31,6 +31,7 @@
             
             <!-- Nút Prev -->
             <ImageView
+                android:id="@+id/btnPrevMonth"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:padding="4dp"
@@ -39,6 +40,7 @@
                 
             <!-- Chữ Lọc Thời gian -->
             <TextView
+                android:id="@+id/tvCurrentMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tháng 04, 2026"
@@ -49,6 +51,7 @@
                 
             <!-- Nút Next -->
             <ImageView
+                android:id="@+id/btnNextMonth"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:padding="4dp"

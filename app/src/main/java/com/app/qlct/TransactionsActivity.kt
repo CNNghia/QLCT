@@ -4,12 +4,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class TransactionsActivity : AppCompatActivity() {
+
+    private var currentMonth = 4
+    private var currentYear = 2026
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transactions)
@@ -43,25 +50,64 @@ class TransactionsActivity : AppCompatActivity() {
         rvTransactions.layoutManager = LinearLayoutManager(this)
         rvTransactions.adapter = TransactionAdapter(txType) // Truyền biến Tín Hiệu vào để Adapter nó Lọc
 
-        // Bật màn hình Loading khi mới mở
+        // Bắt sự kiện Khi người dùng Lùi Tháng, Tiến Tháng
+        val btnPrevMonth = findViewById<ImageView>(R.id.btnPrevMonth)
+        val btnNextMonth = findViewById<ImageView>(R.id.btnNextMonth)
+        val tvCurrentMonth = findViewById<TextView>(R.id.tvCurrentMonth)
+        
+        // Hiển thị lần đầu
+        updateMonthText(tvCurrentMonth)
+        
+        btnPrevMonth.setOnClickListener {
+            currentMonth--
+            if (currentMonth < 1) {
+                currentMonth = 12
+                currentYear--
+            }
+            updateMonthText(tvCurrentMonth)
+            simulateLoadingData()
+        }
+
+        btnNextMonth.setOnClickListener {
+            currentMonth++
+            if (currentMonth > 12) {
+                currentMonth = 1
+                currentYear++
+            }
+            updateMonthText(tvCurrentMonth)
+            simulateLoadingData()
+        }
+
+        // Bắt sự kiện Nhấn Kính Lúp (Search)
+        val fabFilter = findViewById<View>(R.id.fabFilter)
+        fabFilter.setOnClickListener {
+            Toast.makeText(this, "Tính năng tìm kiếm sẽ do Team Backend phụ trách ghép API!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Bật màn hình Loading lần đầu tiên
+        simulateLoadingData()
+    }
+
+    // Hàm dùng chung cho các thao tác Đợi dữ liệu
+    private fun simulateLoadingData() {
+        val layoutLoading = findViewById<View>(R.id.layoutLoading)
+        val layoutEmpty = findViewById<View>(R.id.layoutEmpty)
+        val rvTransactions = findViewById<RecyclerView>(R.id.rvAllTransactions)
+
+        // Bật khung Xương lên, giấu list đi
         layoutLoading.visibility = View.VISIBLE
         layoutEmpty.visibility = View.GONE
         rvTransactions.visibility = View.GONE
 
-        // Giả lập hệ thống đang cực khổ đi lấy dữ liệu mất 2 giây mới xong
         Handler(Looper.getMainLooper()).postDelayed({
-            // Hết 2 giây -> Giấu bộ xương lóng lánh (Loading) đi
+            // Xong thì tắt Xương đi, hiện list lên
             layoutLoading.visibility = View.GONE
+            rvTransactions.visibility = View.VISIBLE
+        }, 1500) // Thời gian đợi là 1.5 giây
+    }
 
-            // Khúc này DEV Logic sau này sẽ viết lệnh gọi từ Database
-            // Ở đây tôi set hasData = false để ép nó bắn ra Màn Hình Trống (Empty State) cho bạn test UI
-            val hasData = true 
-
-            if (hasData) {
-                rvTransactions.visibility = View.VISIBLE
-            } else {
-                layoutEmpty.visibility = View.VISIBLE
-            }
-        }, 2000)
+    private fun updateMonthText(tv: TextView) {
+        val monthStr = if (currentMonth < 10) "0$currentMonth" else "$currentMonth"
+        tv.text = "Tháng $monthStr, $currentYear"
     }
 }
