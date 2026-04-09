@@ -19,6 +19,16 @@ class TransactionsActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_revert)
         toolbar.setNavigationOnClickListener { finish() }
 
+        // Nhận dữ liệu truyền từ màn hình chính qua để Quyết định hiển thị Thông tin gì
+        val txType = intent.getStringExtra("TYPE")
+        if (txType == "INCOME") {
+            toolbar.title = "CHI TIẾT THU NHẬP"
+            toolbar.setTitleTextColor(android.graphics.Color.parseColor("#4CAF50"))
+        } else if (txType == "EXPENSE") {
+            toolbar.title = "CHI TIẾT CHI TIÊU"
+            toolbar.setTitleTextColor(android.graphics.Color.parseColor("#F44336"))
+        }
+
         // Tìm 3 trạng thái UX
         val layoutLoading = findViewById<View>(R.id.layoutLoading)
         val layoutEmpty = findViewById<View>(R.id.layoutEmpty)

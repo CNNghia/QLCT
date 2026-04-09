@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.android.material.button.MaterialButtonToggleGroup
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,8 +52,32 @@ class MainActivity : AppCompatActivity() {
         amountExpense.text = "- 275.000 đ"
         amountExpense.setTextColor(Color.parseColor("#F44336")) // Đổi màu đỏ
 
-        // Sét up Pie Chart (Biểu đồ) chuẩn Fast Budget
-        setupPieChart()
+        // Sét up chức năng Bấm Vào Card chui sang Màn Chi Tiết
+        incomeCard.setOnClickListener {
+            val intent = android.content.Intent(this, TransactionsActivity::class.java)
+            intent.putExtra("TYPE", "INCOME")
+            startActivity(intent)
+        }
+        expenseCard.setOnClickListener {
+            val intent = android.content.Intent(this, TransactionsActivity::class.java)
+            intent.putExtra("TYPE", "EXPENSE")
+            startActivity(intent)
+        }
+
+        // Bắt sự kiện Gạt Nút TỔNG / THU / CHI trên Biểu đồ
+        val toggleChart = findViewById<MaterialButtonToggleGroup>(R.id.toggleChartType)
+        toggleChart.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btnChartTotal -> setupPieChartTotal()
+                    R.id.btnChartIncome -> setupPieChartIncome()
+                    R.id.btnChartExpense -> setupPieChartExpense()
+                }
+            }
+        }
+
+        // Mặc định lúc vừa vào app thì vẽ biểu đồ TỔNG
+        setupPieChartTotal()
 
         // Sét up Adapter cho Danh sách cuộn Giao dịch (RecyclerView)
         val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
@@ -67,10 +92,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupPieChart() {
+    private fun setupPieChartExpense() {
         val pieChart = findViewById<PieChart>(R.id.pieChart)
 
-        // Tạo dữ liệu giả: Chi tiêu theo danh mục
         val entries = ArrayList<PieEntry>()
         entries.add(PieEntry(120000f, "Giải trí"))
         entries.add(PieEntry(50000f, "Ăn uống"))
@@ -88,17 +112,76 @@ class MainActivity : AppCompatActivity() {
         dataSet.valueTextColor = Color.WHITE
 
         pieChart.data = PieData(dataSet)
-
-        // Donut chart style
         pieChart.description.isEnabled = false
         pieChart.isDrawHoleEnabled = true
         pieChart.holeRadius = 50f
         pieChart.setTransparentCircleAlpha(0)
-        pieChart.centerText = "Tháng này\n- 275.000 đ"
+        pieChart.centerText = "Chi Tiêu\n- 275.000 đ"
+        pieChart.setCenterTextSize(14f)
+        pieChart.setCenterTextColor(Color.parseColor("#F44336"))
+        pieChart.legend.isEnabled = false
+        
+        pieChart.animateY(800)
+    }
+
+    private fun setupPieChartIncome() {
+        val pieChart = findViewById<PieChart>(R.id.pieChart)
+
+        val entries = ArrayList<PieEntry>()
+        entries.add(PieEntry(5000000f, "Lương"))
+        entries.add(PieEntry(500000f, "Lì xì"))
+        entries.add(PieEntry(1500000f, "Bán đồ cũ"))
+        entries.add(PieEntry(8000000f, "Thưởng dự án"))
+
+        val dataSet = PieDataSet(entries, "")
+        dataSet.colors = listOf(
+            Color.parseColor("#4CAF50"), // Xanh lá
+            Color.parseColor("#8BC34A"), // Xanh mạ
+            Color.parseColor("#CDDC39"), // Vàng chanh
+            Color.parseColor("#009688")  // Xanh ngọc
+        )
+        dataSet.valueTextSize = 12f
+        dataSet.valueTextColor = Color.WHITE
+
+        pieChart.data = PieData(dataSet)
+        pieChart.description.isEnabled = false
+        pieChart.isDrawHoleEnabled = true
+        pieChart.holeRadius = 50f
+        pieChart.setTransparentCircleAlpha(0)
+        pieChart.centerText = "Tổng Thu\n+ 15.000.000 đ"
+        pieChart.setCenterTextSize(14f)
+        pieChart.setCenterTextColor(Color.parseColor("#4CAF50"))
+        pieChart.legend.isEnabled = false
+        
+        pieChart.animateY(800)
+    }
+
+    private fun setupPieChartTotal() {
+        val pieChart = findViewById<PieChart>(R.id.pieChart)
+
+        val entries = ArrayList<PieEntry>()
+        // Thu 15tr, Chi 275k (để tỷ lệ biểu đồ khỏi bị đè nếu vẽ thật, tạm coi Thu là miếng bự, Chi là miếng nhỏ xíu)
+        entries.add(PieEntry(15000000f, "Tổng Thu"))
+        entries.add(PieEntry(275000f, "Tổng Chi"))
+
+        val dataSet = PieDataSet(entries, "")
+        dataSet.colors = listOf(
+            Color.parseColor("#4CAF50"), // Xanh lá mơn mởn (Thu)
+            Color.parseColor("#F44336")  // Đỏ rực rỡ (Chi)
+        )
+        dataSet.valueTextSize = 14f
+        dataSet.valueTextColor = Color.WHITE
+
+        pieChart.data = PieData(dataSet)
+        pieChart.description.isEnabled = false
+        pieChart.isDrawHoleEnabled = true
+        pieChart.holeRadius = 50f
+        pieChart.setTransparentCircleAlpha(0)
+        pieChart.centerText = "Số Dư\n+ 14.725.000 đ"
         pieChart.setCenterTextSize(14f)
         pieChart.setCenterTextColor(Color.parseColor("#757575"))
         pieChart.legend.isEnabled = false
         
-        pieChart.animateY(1000)
+        pieChart.animateY(800)
     }
 }
