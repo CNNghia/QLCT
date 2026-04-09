@@ -1,47 +1,38 @@
 package com.app.qlct
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.app.qlct.ui.theme.QLCTTheme
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            QLCTTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
-    }
-}
+        
+        // Ném giao diện (XML Phase 3) thay vì code Compose cũ
+        setContentView(R.layout.fragment_dashboard)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        // Mock dữ liệu thẻ Tổng Thu
+        val incomeCard = findViewById<View>(R.id.cardIncome)
+        val titleIncome = incomeCard.findViewById<TextView>(R.id.tvStatTitle)
+        val amountIncome = incomeCard.findViewById<TextView>(R.id.tvStatAmount)
+        titleIncome.text = "Tổng Thu"
+        amountIncome.text = "+ 15.000.000 đ"
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    QLCTTheme {
-        Greeting("Android")
+        // Mock dữ liệu thẻ Tổng Chi
+        val expenseCard = findViewById<View>(R.id.cardExpense)
+        val titleExpense = expenseCard.findViewById<TextView>(R.id.tvStatTitle)
+        val amountExpense = expenseCard.findViewById<TextView>(R.id.tvStatAmount)
+        titleExpense.text = "Tổng Chi"
+        amountExpense.text = "- 275.000 đ"
+        amountExpense.setTextColor(android.graphics.Color.parseColor("#F44336")) // Đổi màu đỏ
+
+        // Sét up Adapter cho Danh sách cuộn Giao dịch (RecyclerView)
+        val rvTransactions = findViewById<RecyclerView>(R.id.rvTransactions)
+        rvTransactions.layoutManager = LinearLayoutManager(this)
+        rvTransactions.adapter = TransactionAdapter()
     }
 }
