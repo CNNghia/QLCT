@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Padding and Margins -->
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_header">20sp</dimen>
+    <dimen name="text_xlarge">28sp</dimen> <!-- Dùng cho việc hiển thị Tổng Số Tiền to -->
+
+    <!-- Corner Radii for Cards -->
+    <dimen name="corner_radius_small">8dp</dimen>
+    <dimen name="corner_radius_medium">16dp</dimen>
+    <dimen name="corner_radius_large">24dp</dimen>
+    
+    <!-- Icon Sizes -->
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_size_medium">32dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+</resources>
