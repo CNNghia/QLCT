@@ -62,10 +62,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="24dp"
-            android:paddingBottom="16dp"
-            android:weightSum="2">
+            android:paddingBottom="16dp">
             
             <LinearLayout
+                android:id="@+id/layoutSummaryIn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -87,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutSummaryOut"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

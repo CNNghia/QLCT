@@ -19,14 +19,20 @@ class TransactionsActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_revert)
         toolbar.setNavigationOnClickListener { finish() }
 
+        // Tóm tắt tiền (Header)
+        val layoutSummaryIn = findViewById<View>(R.id.layoutSummaryIn)
+        val layoutSummaryOut = findViewById<View>(R.id.layoutSummaryOut)
+
         // Nhận dữ liệu truyền từ màn hình chính qua để Quyết định hiển thị Thông tin gì
         val txType = intent.getStringExtra("TYPE")
         if (txType == "INCOME") {
             toolbar.title = "CHI TIẾT THU NHẬP"
             toolbar.setTitleTextColor(android.graphics.Color.parseColor("#4CAF50"))
+            layoutSummaryOut.visibility = View.GONE  // Ẩn cột Tiền Ra
         } else if (txType == "EXPENSE") {
             toolbar.title = "CHI TIẾT CHI TIÊU"
             toolbar.setTitleTextColor(android.graphics.Color.parseColor("#F44336"))
+            layoutSummaryIn.visibility = View.GONE   // Ẩn cột Tiền Vào
         }
 
         // Tìm 3 trạng thái UX
@@ -35,7 +41,7 @@ class TransactionsActivity : AppCompatActivity() {
         val rvTransactions = findViewById<RecyclerView>(R.id.rvAllTransactions)
 
         rvTransactions.layoutManager = LinearLayoutManager(this)
-        rvTransactions.adapter = TransactionAdapter()
+        rvTransactions.adapter = TransactionAdapter(txType) // Truyền biến Tín Hiệu vào để Adapter nó Lọc
 
         // Bật màn hình Loading khi mới mở
         layoutLoading.visibility = View.VISIBLE

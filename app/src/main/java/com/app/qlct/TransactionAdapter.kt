@@ -7,7 +7,28 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+class TransactionAdapter(private val filterType: String? = null) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+
+    // Tạo bộ khung dữ liệu ảo (Mock Data) chuẩn xác và phong phú hơn
+    data class MockTx(val note: String, val date: String, val amountStr: String, val isIncome: Boolean)
+
+    private val allData = listOf(
+        MockTx("Ăn sáng phở bò", "Hôm nay • Ăn uống", "- 50.000 đ", false),
+        MockTx("Lương tháng 3", "Hôm qua • Thu nhập", "+ 15.000.000 đ", true),
+        MockTx("Lì xì năm mới", "Tuần trước • Tiền thưởng", "+ 500.000 đ", true),
+        MockTx("Đổ xăng", "Hôm kia • Đi lại", "- 40.000 đ", false),
+        MockTx("Xem phim chiếu rạp", "10/04/2026 • Giải trí", "- 120.000 đ", false),
+        MockTx("Thanh lý đồ cũ", "08/04/2026 • Bán hàng", "+ 1.500.000 đ", true),
+        MockTx("Cà phê với bạn", "05/04/2026 • Ăn uống", "- 65.000 đ", false),
+        MockTx("Thưởng vượt năng suất", "01/04/2026 • Thu nhập", "+ 8.000.000 đ", true)
+    )
+
+    // Bộ Lọc Siêu Tốc: Dựa vào Tín hiệu truyền vào để lấy mảng dữ liệu tương ứng
+    private val displayList = when (filterType) {
+        "INCOME" -> allData.filter { it.isIncome }
+        "EXPENSE" -> allData.filter { !it.isIncome }
+        else -> allData // Nếu = null hoặc "ALL" thì hiện toàn bộ
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvNote: TextView = view.findViewById(R.id.tvTransactionNote)
@@ -22,40 +43,19 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // Tạm thời mock data giả để bạn nhìn thấy thao tác cuộn mượt mà
-        when (position) {
-            0 -> {
-                holder.tvNote.text = "Ăn sáng phở bò"
-                holder.tvDate.text = "Hôm nay • Ăn uống"
-                holder.tvAmount.text = "- 50.000 đ"
-                holder.tvAmount.setTextColor(Color.parseColor("#F44336"))
-            }
-            1 -> {
-                holder.tvNote.text = "Lương tháng 3"
-                holder.tvDate.text = "Hôm qua • Thu nhập"
-                holder.tvAmount.text = "+ 15.000.000 đ"
-                holder.tvAmount.setTextColor(Color.parseColor("#4CAF50"))
-            }
-            2 -> {
-                holder.tvNote.text = "Đổ xăng"
-                holder.tvDate.text = "Hôm kia • Đi lại"
-                holder.tvAmount.text = "- 40.000 đ"
-                holder.tvAmount.setTextColor(Color.parseColor("#F44336"))
-            }
-            3 -> {
-                holder.tvNote.text = "Xem phim chiếu rạp"
-                holder.tvDate.text = "10/04/2026 • Giải trí"
-                holder.tvAmount.text = "- 120.000 đ"
-                holder.tvAmount.setTextColor(Color.parseColor("#F44336"))
-            }
-            else -> {
-                holder.tvNote.text = "Cà phê với bạn"
-                holder.tvDate.text = "05/04/2026 • Ăn uống"
-                holder.tvAmount.text = "- 65.000 đ"
-                holder.tvAmount.setTextColor(Color.parseColor("#F44336"))
-            }
+        val item = displayList[position]
+        
+        holder.tvNote.text = item.note
+        holder.tvDate.text = item.date
+        holder.tvAmount.text = item.amountStr
+        
+        // Đổi màu Xanh cho Thu và Đỏ cho Chi
+        if (item.isIncome) {
+            holder.tvAmount.setTextColor(Color.parseColor("#4CAF50"))
+        } else {
+            holder.tvAmount.setTextColor(Color.parseColor("#F44336"))
         }
     }
 
-    override fun getItemCount() = 5
+    override fun getItemCount() = displayList.size
 }
