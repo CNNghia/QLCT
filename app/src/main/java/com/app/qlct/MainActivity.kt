@@ -1,6 +1,7 @@
 package com.app.qlct
 
 import android.os.Bundle
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         amountIncome.text = "+ 15.000.000 đ"
         val tvTotalBalance = findViewById<TextView>(R.id.tvTotalBalance)
         tvTotalBalance.text = "14.725.000 đ"
+
 
         // Mock dữ liệu thẻ Tổng Chi
         val expenseCard = findViewById<View>(R.id.cardExpense)
