@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:strokeWidth="0dp">
+
+    <!-- Phông nền giả lập Creadit Card có thay đổi màu theo code -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bgCardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E1E1E"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvWalletName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Ví Tiền Mặt" />
+
+        <!-- Biểu tượng chip của thẻ nhựa cho sang xịn mịn -->
+        <ImageView
+            android:id="@+id/imgWalletIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_transaction"
+            app:tint="#B3FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvWalletBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/tvWalletName"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="14.500.000 đ" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Khả dụng"
+            android:textColor="#80FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/tvWalletBalance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+            
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

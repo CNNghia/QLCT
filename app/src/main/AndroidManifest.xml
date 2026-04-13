@@ -22,6 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity 
+            android:name=".AddTransactionActivity"
+            android:theme="@style/Theme.QLCT"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity 
+            android:name=".WalletActivity"
+            android:theme="@style/Theme.QLCT" />
+
+        <activity 
+            android:name=".TransactionsActivity"
+            android:theme="@style/Theme.QLCT" />
     </application>
 
 </manifest>
